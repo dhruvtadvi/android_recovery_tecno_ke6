@@ -5,24 +5,24 @@ on:
     inputs:
       MANIFEST_URL:
         description: 'MANIFEST_URL (if want to use SSH keys, use git@github.com:XXXXX)'
-        required: false
+        required: true
         default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
       MANIFEST_BRANCH:
         description: 'MANIFEST_BRANCH'
-        required: false
+        required: true
         default: 'twrp-12.1'
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
-        required: false
-        default: 'https://github.com/DHRUV-777/android_device_tecno_ke6'
+        required: true
+        default: 'https://github.com/TeamWin/android_device_asus_I003D'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
-        required: false
-        default: 'twrp_android-10'
+        required: true
+        default: 'android-12.1'
       DEVICE_PATH:
         description: 'DEVICE_PATH'
-        required: false
-        default: 'device/tecno/KE6'
+        required: true
+        default: 'device/asus/I003D'
       COMMON_TREE_URL:
         description: 'COMMON_TREE_URL (if no common tree, leave blank)'
         required: false
@@ -31,22 +31,21 @@ on:
         required: false
       DEVICE_NAME:
         description: 'DEVICE_NAME'
-        required: false
-        default: 'KE6'
+        required: true
+        default: 'I003D'
       MAKEFILE_NAME:
         description: 'MAKEFILE_NAME'
-        required: false
-        default: 'twrp_KE6'
+        required: true
+        default: 'twrp_I003D'
       BUILD_TARGET:
         description: 'BUILD_TARGET'
-        required: false
+        required: true
         default: 'recovery'
 
 jobs:
   build:
     if: github.event.repository.owner.id == github.event.sender.id
-    runs-on: ubuntu-18.04
-    # You can use either of the ubuntu-18.04 or ubuntu-20.04 runner
+    runs-on: ubuntu-20.04
     steps:
     - name: Display Run Parameters
       run: |
@@ -86,11 +85,6 @@ jobs:
       with:
           ssh-private-key: |
               ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Set variables
-      run: |
-        echo "::set-output name=date::$(date +%F)"
-      id: var
-      
     - name: Install repo
       run: |
         mkdir ~/bin
@@ -102,7 +96,7 @@ jobs:
       run: |
         mkdir workspace
         cd workspace
-        echo "::set-output name=pwd::$(pwd)"
+        echo "workspace-folder=$(pwd)" >> $GITHUB_OUTPUT
         git config --global user.name "Captain Throwback"
         git config --global user.email "captainthrowback@hotmail.com"
         repo init --depth=1 -u ${{ github.event.inputs.MANIFEST_URL }} -b ${{ github.event.inputs.MANIFEST_BRANCH }}
@@ -115,9 +109,8 @@ jobs:
       
     - name: Clone device tree
       run: |
-        git clone --single-branch -b twrp_android-10 https://github.com/DHRUV-777/android_recovery_tecno_ke6 ./${{ github.event.inputs.DEVICE_PATH }}
-
-      working-directory: ${{ steps.pwd.outputs.pwd }}
+        git clone ${{ github.event.inputs.DEVICE_TREE_URL }} -b ${{ github.event.inputs.DEVICE_TREE_BRANCH }} ./${{ github.event.inputs.DEVICE_PATH }}
+      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
     - name: Clone common tree
       if: |
@@ -125,7 +118,7 @@ jobs:
         && github.event.inputs.COMMON_PATH != null
       run: |
         git clone ${{ github.event.inputs.COMMON_TREE_URL }} -b ${{ github.event.inputs.DEVICE_TREE_BRANCH }} ./${{ github.event.inputs.COMMON_PATH }}
-      working-directory: ${{ steps.pwd.outputs.pwd }}
+      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
     - name: Check Build Tree
       uses: haya14busa/action-cond@v1
@@ -139,7 +132,7 @@ jobs:
       run: |
         bash ${GITHUB_WORKSPACE}/scripts/convert.sh ${{ github.event.inputs.DEVICE_PATH }}/${{ steps.buildtree.outputs.value }}.dependencies
         repo sync -j$(nproc --all)
-      working-directory: ${{ steps.pwd.outputs.pwd }}
+      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
       continue-on-error: true
 
     - name: Set Swap Space
@@ -147,19 +140,12 @@ jobs:
       with:
         swap-size-gb: 12
 
-    - name: Check Build Branch
-      if: ${{ github.event.inputs.MANIFEST_BRANCH == 'twrp-12.1' }}
-      run: |
-        source build/envsetup.sh
-        repopick 5405 5540
-      working-directory: ${{ steps.pwd.outputs.pwd }}
-
     - name: Building recovery
       run: |
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
         lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
-      working-directory: ${{ steps.pwd.outputs.pwd }}
+      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
