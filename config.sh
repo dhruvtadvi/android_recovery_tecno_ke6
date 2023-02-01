@@ -1,5 +1,5 @@
 # Device
-export FOX_BRANCH="fox_10.0"
+export FOX_BRANCH="fox_11.0"
 export DT_LINK="https://github.com/dhruvtadvi/android_recovery_tecno_ke6 -b main"
 
 export DEVICE="KE6"
