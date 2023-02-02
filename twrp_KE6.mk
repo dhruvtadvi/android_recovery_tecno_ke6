@@ -2,7 +2,8 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
 # Inherit from our custom product configuration
-$(call inherit-product, vendor/twrp/config/common.mk)
+$(call inherit-product-if-exists, vendor/pb/config/common.mk)
+$(call inherit-product-if-exists, vendor/twrp/config/common.mk)
 
 # Inherit from KE6 device
 $(call inherit-product, device/tecno/KE6/device.mk)
