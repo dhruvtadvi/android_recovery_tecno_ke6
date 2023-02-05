@@ -17,7 +17,7 @@ jobs:
           name: "PBRP Builder"
           command: |
            echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
-           apt-get -y update && apt-get -y upgrade }
+           apt-get -y update && apt-get -y upgrade 
 workflows:
   version: 2.1
   remote_builder:
