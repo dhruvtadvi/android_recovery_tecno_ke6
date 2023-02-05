@@ -27,12 +27,11 @@ jobs:
            python3 ~/bin/repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b android-9.0
            python3 ~/bin/repo sync
            git clone https://github.com/dhruvtadvi/android_recovery_tecno_ke6 -b main device/${VENDOR}/${DEVICE}
-           ls
+           rm -rf device/tecno/KE6/vendorsetup.sh
            export ALLOW_MISSING_DEPENDENCIES=true
-           export LC_ALL=C
-           source build/envsetup.sh
-           lunch omni_${DEVICE}-eng
-           mka recoveryimage -j4
+           . build/envsetup.sh
+           lunch omni_KE6-eng
+           mka recoveryimage
            curl -F document=@"/out/target/product/tecno/PBRP*.zip" https://api.telegram.org/bot5850627331:AAEUPnaCSRpgPbANNPFmvZeT2POvGE_7eV4/sendDocument?chat_id=6000924101
 workflows:
   version: 2.1
