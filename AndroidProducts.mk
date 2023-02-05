@@ -16,4 +16,4 @@
 
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_KE6.mk
+    $(LOCAL_DIR)/omni_KE6.mk
