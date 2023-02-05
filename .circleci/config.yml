@@ -26,7 +26,7 @@ jobs:
            git config --global color.ui false
            python3 ~/bin/repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b android-9.0
            python3 ~/bin/repo sync
-           git clone https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} device/${VENDOR}/${DEVICE}
+           git clone https://github.com/dhruvtadvi/android_recovery_tecno_ke6 -b main device/${VENDOR}/${DEVICE}
            export ALLOW_MISSING_DEPENDENCIES=true
            export LC_ALL=C
            source build/envsetup.sh
