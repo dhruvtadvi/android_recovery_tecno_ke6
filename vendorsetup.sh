@@ -19,7 +19,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export ALLOW_MISSING_DEPENDENCIES=true
     export LC_ALL="C"
 	export TW_DEFAULT_LANGUAGE="en"
-	export OF_VANILLA_BUILD=1
 
 	# Device Information
 	export OF_AB_DEVICE=1
