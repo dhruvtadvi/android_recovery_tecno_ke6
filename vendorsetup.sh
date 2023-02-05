@@ -21,7 +21,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export TW_DEFAULT_LANGUAGE="en"
 
 	# Device Information
-	export OF_AB_DEVICE=1
 	export TARGET_DEVICE_ALT="tecno"
   export FOX_RECOVERY_BOOT_PARTITION="/dev/block/platform/bootdevice/by-name/boot"
 	export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
@@ -49,7 +48,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	# R11.1 Settings
 	export FOX_VERSION="R11.1_1"
 	export FOX_BUILD_TYPE="Natu"
-	export OF_MAINTAINER="Dhruv"
+	export OF_MAINTAINER="dhruvtadvi"
 
 	# let's see what are our build VARs
 	if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
