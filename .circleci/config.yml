@@ -23,6 +23,7 @@ jobs:
            chmod a+x ~/bin/repo
            git config --global user.email "${GIT_EMAIL}"
            git config --global user.name "{GIT_NAME}"
+           git config --global color.ui false
            python3 ~/bin/repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b android-9.0
            python3 ~/bin/repo sync
            git clone https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} device/${VENDOR}/${DEVICE}
