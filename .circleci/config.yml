@@ -27,6 +27,8 @@ jobs:
            python3 ~/bin/repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb.git -b android-9.0
            python3 ~/bin/repo sync
            git clone https://github.com/dhruvtadvi/android_recovery_tecno_ke6 -b main device/${VENDOR}/${DEVICE}
+           rm -rf device/tecno/KE6/vendorsetup.sh
+           rm -rf device/tecno/KE6/config.sh
            export ALLOW_MISSING_DEPENDENCIES=true
            . build/envsetup.sh
            lunch omni_KE6-eng
