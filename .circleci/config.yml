@@ -32,7 +32,7 @@ jobs:
            source build/envsetup.sh
            lunch omni_${DEVICE}-eng
            ls device/tecno/ke6
-    
+   
 workflows:
   version: 2.1
   remote_builder:
