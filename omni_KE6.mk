@@ -10,7 +10,7 @@ $(call inherit-product, device/tecno/KE6/device.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := KE6
-PRODUCT_NAME := twrp_KE6
+PRODUCT_NAME := omni_KE6
 PRODUCT_BRAND := Tecno
 PRODUCT_MODEL := KE6
 PRODUCT_MANUFACTURER := Tecno
