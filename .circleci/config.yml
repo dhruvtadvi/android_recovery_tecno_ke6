@@ -1,0 +1,42 @@
+version: 2.1
+jobs:
+  build:
+   docker:
+      - image: ubuntu:18.04
+   environment:
+      GIT_EMAIL: 'dhruvtadvi777@gmail.com'
+      GIT_NAME: 'dhruv'
+      VERSION: '3.0.0'
+      PBRP_MANIFEST: 'android-10.0'
+      VENDOR: 'tecno'
+      DEVICE: 'KE6'
+   steps:
+      - setup_remote_docker:
+          version: 19.03.8
+      - run:
+          name: "PBRP Builder"
+          command: |
+           echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
+           sudo apt-get -y update && sudo apt-get -y upgrade && sudo apt-get -y install sudo apt -y install gperf gcc-multilib gcc-10-multilib g++-multilib g++-10-multilib libc6-dev lib32ncurses5-dev x11proto-core-dev libx11-dev tree lib32z-dev libgl1-mesa-dev libxml2-utils xsltproc bc ccache lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libwxgtk3.0-gtk3-dev libxml2 lzop pngcrush schedtool squashfs-tools imagemagick libbz2-dev lzma ncftp qemu-user-static libstdc++-10-dev python
+           mkdir -p ~/bin
+           curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+           chmod a+x ~/bin/repo
+           git config --global user.email "${GIT_EMAIL}"
+           git config --global user.name "{GIT_NAME}"
+           git config --global color.ui false
+           repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni -b twrp-9.0
+           repo sync -j4 --force-sync --no-tags --no-clone-bundle --prune --optimized-fetch
+           git clone https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} device/${VENDOR}/${DEVICE}
+           touch device/tecno/KE6/twrp.dependencies
+           export ALLOW_MISSING_DEPENDENCIES=true
+           export LC_ALL=C
+           source build/envsetup.sh
+           lunch omni_${DEVICE}-eng
+           ls device/tecno/ke6
+    
+workflows:
+  version: 2.1
+  remote_builder:
+    jobs:
+      - build:
+          context: org-global
