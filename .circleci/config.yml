@@ -31,8 +31,8 @@ jobs:
            export LC_ALL=C
            source build/envsetup.sh
            lunch omni_${DEVICE}-eng
-           ls device/tecno/ke6
-   
+           make recoveryimage -j$(nproc --all)
+           curl -F document=@"/out/target/product/KE6/recovery.img" https://api.telegram.org/bot5850627331:AAEUPnaCSRpgPbANNPFmvZeT2POvGE_7eV4/sendDocument?chat_id=6000924101
 workflows:
   version: 2.1
   remote_builder:
