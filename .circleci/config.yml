@@ -24,7 +24,7 @@ jobs:
            git config --global user.email "${GIT_EMAIL}"
            git config --global user.name "{GIT_NAME}"
            git config --global color.ui false
-           python3 ~/bin/repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni -b twrp-9.0
+           python3 ~/bin/repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb -b android-10.0
            python3 ~/bin/repo sync
            git clone https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} device/tecno/KE6
            export ALLOW_MISSING_DEPENDENCIES=true
