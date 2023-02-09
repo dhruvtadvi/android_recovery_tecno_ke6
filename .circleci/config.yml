@@ -19,7 +19,7 @@ jobs:
             apt update -y && apt upgrade -y
             apt install wget -y
             wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
-            tar --use-compress-program=unzstd -xvf MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.*
+            tar --use-compress-program=unzstd -xvf MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
            
 workflows:
   version: 2.1
