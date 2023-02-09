@@ -16,8 +16,8 @@ jobs:
       - run:
           name: "PBRP Builder"
           command: |
-            apt update && apt upgrade
-            apt install wget
+            apt update -y && apt upgrade -y
+            apt install wget -y
             wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
             cat MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.* | tar --zstd -xv
            
