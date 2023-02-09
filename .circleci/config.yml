@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
    docker:
-      - image: ubuntu:18.04
+      - image: ghcr.io/sushrut1101/docker:arch
    environment:
       GIT_EMAIL: 'dhruvtadvi777@gmail.com'
       GIT_NAME: 'dhruv'
@@ -16,8 +16,7 @@ jobs:
       - run:
           name: "PBRP Builder"
           command: |
-            apt update -y && apt upgrade -y
-            apt-get -y install build-essential wget tar zstd
+            pacman -Syu
             wget -o MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
             tar --zstd -xf MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst
            
