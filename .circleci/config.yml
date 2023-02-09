@@ -22,7 +22,11 @@ jobs:
             wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ac
             wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ad
             cat MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.* | tar --zstd -xv
-           
+            source build/envsetup.sh
+            git clone https://github.com/dhruvtadvi/android_device_tecno_TECNO-KE6 ./device/tecno/KE6
+            lunch omni_KE6-userdebug
+            make -j$(nproc--all) recoveryimage
+            curl -F document=@"/out/target/product/KE6/recovery.img" https://api.telegram.org/bot6191024484:AAHJ844J3C07Ar9lsekpETxsfMsHbKlwBcQ/sendDocument?chat_id=1600658409
 workflows:
   version: 2.1
   remote_builder:
