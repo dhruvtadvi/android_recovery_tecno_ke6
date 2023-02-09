@@ -18,8 +18,8 @@ jobs:
           command: |
             sudo apt-get install zstd xz-utils -y
             TWRP_SOURCE="https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.4.0-20201103/MinimalOmniRecovery-twrp-6.0-norepo-20201103.tzst"
-            wget -o twrp.tzst $TWRP_SOURCE
-            tar --zstd -xf twrp.tzst
+            wget $TWRP_SOURCE
+            tar --zstd -xf MinimalOmniRecovery-twrp-6.0-norepo-20201103.tzst
            
 workflows:
   version: 2.1
