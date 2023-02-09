@@ -18,8 +18,8 @@ jobs:
           command: |
             apt update -y && apt upgrade -y
             apt-get -y install build-essential wget tar zstd
-            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
-            unzstd MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
+            wget -o MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
+            unzstd MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst
            
 workflows:
   version: 2.1
