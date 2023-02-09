@@ -17,8 +17,11 @@ jobs:
           name: "PBRP Builder"
           command: |
             sudo apt-get install zstd xz-utils -y
-            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.4.0-20201103/MinimalOmniRecovery-twrp-6.0-norepo-20201103.tzst
-            tar --zstd -xf MinimalOmniRecovery-twrp-6.0-norepo-20201103.tzst
+            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.aa
+            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
+            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ac
+            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ad
+            cat MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.* | tar --zstd -xv
            
 workflows:
   version: 2.1
