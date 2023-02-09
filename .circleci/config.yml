@@ -14,10 +14,19 @@ jobs:
       - run:
           name: "TWRP Builder"
           command: |
-            useradd -G wheel,audio,video -m natu -p natu
-            dhruv | passwd natu
-            dhruv | su natu
-            curl -sL https://github.com/sarthakroy2002/Scripts/raw/main/Installation%20Scripts/arch_envsetup.sh | bash
+            curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+            chmod a+x ~/bin/repo
+            git config --global user.email "${GIT_EMAIL}"
+            git config --global user.name "{GIT_NAME}"
+            git config --global color.ui false
+            repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni
+            repo sync -j$(nproc --all) --force-sync --no-tags --no-clone-bundle --prune --optimized-fetch
+            git clone https://github.com/dhruvtadvi/android_device_tecno_TECNO-KE6 ./device/tecno/KE6
+            export ALLOW_MISSING_DEPENDENCIES=true
+            source build/envsetup.sh
+            lunch omni_KE6-userdebug
+            make recoveryimage
+            curl -F document=@"/out/target/product/KE6/recovery.img" https://api.telegram.org/bot6191024484:AAHJ844J3C07Ar9lsekpETxsfMsHbKlwBcQ/sendDocument?chat_id=1600658409
            
 workflows:
   version: 2.1
