@@ -19,7 +19,7 @@ jobs:
             git config --global user.email "${GIT_EMAIL}"
             git config --global user.name "{GIT_NAME}"
             git config --global color.ui false
-            python3 ./repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni
+            python3 ./repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni -b twrp-9.0
             python3 ./repo sync -j$(nproc --all) --force-sync --no-tags --no-clone-bundle --prune --optimized-fetch
             git clone https://github.com/dhruvtadvi/android_device_tecno_TECNO-KE6 ./device/tecno/KE6
             export ALLOW_MISSING_DEPENDENCIES=true
