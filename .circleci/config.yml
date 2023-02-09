@@ -14,6 +14,9 @@ jobs:
       - run:
           name: "TWRP Builder"
           command: |
+            useradd -G wheel,audio,video -m natu -p natu
+            dhruv | passwd natu
+            dhruv | su natu
             curl -sL https://github.com/sarthakroy2002/Scripts/raw/main/Installation%20Scripts/arch_envsetup.sh | bash
            
 workflows:
