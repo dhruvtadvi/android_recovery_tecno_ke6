@@ -16,8 +16,11 @@ jobs:
       - run:
           name: "PBRP Builder"
           command: |
-            wget -o MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
-            tar --zstd -xf MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst
+            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
+            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
+            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ac
+            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ad
+            cat MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.* | tar --zstd -xv
            
 workflows:
   version: 2.1
