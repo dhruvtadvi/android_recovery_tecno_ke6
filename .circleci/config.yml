@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
    docker:
-      - image: ghcr.io/sushrut1101/docker:arch
+      - image: fr3akyphantom/droid-builder:latest
    environment:
       GIT_EMAIL: 'dhruvtadvi777@gmail.com'
       GIT_NAME: 'dhruv'
@@ -16,11 +16,9 @@ jobs:
       - run:
           name: "PBRP Builder"
           command: |
-            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
-            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
-            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ac
-            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ad
-            cat MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.* | tar --zstd -xv
+            TWRP_SOURCE="https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.4.0-20201103/MinimalOmniRecovery-twrp-6.0-norepo-20201103.tzst"
+            aria2c -x16 -s8 --console-log-level=error --summary-interval=0 "${TWRP_SOURCE}" -o twrp.tzst || wget -q --show-progress --progress=bar:force "${TWRP_SOURCE}" -O twrp.tzst
+            tar --zstd -xf twrp.tzst --directory $HOME/twrp/ && rm twrp.tzst
            
 workflows:
   version: 2.1
