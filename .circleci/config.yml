@@ -16,23 +16,10 @@ jobs:
       - run:
           name: "PBRP Builder"
           command: |
-           echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
-           apt-get -y update && apt-get -y upgrade && apt-get -y install bc curl python3 bison build-essential curl flex g++-multilib gcc gcc-multilib clang git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev unzip openjdk-8-jdk python ccache libtinfo5 repo libstdc++6 wget libssl-dev rsync
-           mkdir -p ~/bin
-           curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-           chmod a+x ~/bin/repo
-           git config --global user.email "${GIT_EMAIL}"
-           git config --global user.name "{GIT_NAME}"
-           git config --global color.ui false
-           python3 ~/bin/repo init --depth=1 -u https://github.com/PitchBlackRecoveryProject/manifest_pb -b android-10.0
-           python3 ~/bin/repo sync
-           git clone https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} -b ${CIRCLE_BRANCH} device/tecno/KE6
-           export ALLOW_MISSING_DEPENDENCIES=true
-           export LC_ALL=C
-           source build/envsetup.sh
-           lunch omni_${DEVICE}-eng
-           make recoveryimage -j$(nproc --all)
-           curl -F document=@"/out/target/product/KE6/recovery.img" https://api.telegram.org/bot5850627331:AAEUPnaCSRpgPbANNPFmvZeT2POvGE_7eV4/sendDocument?chat_id=6000924101
+            apt install wget
+            wget https://github.com/PhantomZone54/twrp_sources_norepo/releases/download/v3.5.0_9-20210130/MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.ab
+            cat MinimalOmniRecovery-twrp-9.0-norepo-20210130.tzst.* | tar --zstd -xv
+           
 workflows:
   version: 2.1
   remote_builder:
