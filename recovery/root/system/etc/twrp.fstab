@@ -1,0 +1,14 @@
+/system		        ext4	/dev/block/mapper/system                                flags=backup=1;display="System"
+/vendor                 ext4    /dev/block/mapper/vendor                                flags=backup=1;display="Vendor"
+/product                ext4    /dev/block/mapper/product                               flags=backup=1;display="Product"
+/system_image	        emmc	/dev/block/mapper/system                                flags=backup=1;display="System Image";flashimg=1
+/vendor_image	        emmc	/dev/block/mapper/vendor                                flags=backup=1;display="Vendor Image";flashimg=1
+/product_image	        emmc	/dev/block/mapper/product                               flags=backup=1;display="Product Image";flashimg=1
+
+/data			f2fs	/dev/block/platform/bootdevice/by-name/userdata		flags=fileencryption=aes-256-xts
+/cache             ext4     /dev/block/platform/bootdevice/by-name/cache        flags=backup=1;display="Cache";wipeingui
+/dtbo              emmc     /dev/block/platform/bootdevice/by-name/dtbo         flags=backup=1;display="DTBO";flashimg=1
+/nvram			emmc	/dev/block/platform/bootdevice/by-name/nvram		flags=display="nvram";backup=1;flashimg=1
+/protect_f		ext4	/dev/block/platform/bootdevice/by-name/protect1		flags=display="protect_f";backup=1;flashimg=1
+/protect_s		ext4	/dev/block/platform/bootdevice/by-name/protect2		flags=display="protect_s";backup=1;flashimg=1
+/lk			emmc	/dev/block/platform/bootdevice/by-name/lk		flags=display="lk";backup=1;flashimg=1
